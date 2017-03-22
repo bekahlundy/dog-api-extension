@@ -22,6 +22,26 @@ app.get('/api/tags', (request, response) => {
           });
 })
 
+app.get('/api/photos', (request, response) => {
+  database('photos').select()
+          .then((photos) => {
+            response.status(200).json(photos);
+          })
+          .catch((error) => {
+            console.error('somethings wrong with db (photos)')
+          });
+})
+
+app.get('/api/feelings', (request, response) => {
+  database('feelings').select()
+          .then((feelings) => {
+            response.status(200).json(feelings);
+          })
+          .catch((error) => {
+            console.error('somethings wrong with db (feelings)')
+          });
+})
+
 app.listen(app.get('port'), () => {
   console.log(`pup pals is running on ${app.get('port')}.`)
 })
