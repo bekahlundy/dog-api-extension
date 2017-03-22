@@ -22,15 +22,15 @@ app.get('/api/tags', (request, response) => {
           });
 })
 
-app.get('/api/tags/:tagId/photos', (request, response) => {
-  database('photos').where('tagId', request.params.tagId).select()
-  .then((tags) => {
-    response.status(200).json(tags)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-})
+// app.get('/api/tags/:tagId/photos', (request, response) => {
+//   database('photos').where('tagId', request.params.tagId).select()
+//   .then((tags) => {
+//     response.status(200).json(tags)
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
+// })
 
 app.get('/api/photos', (request, response) => {
   database('photos').select()
@@ -41,6 +41,26 @@ app.get('/api/photos', (request, response) => {
             console.error('somethings wrong with db (photos)')
           });
 })
+
+app.get('/api/photos/tag/:tagId', (request, response) => {
+  database('photos').where('tagId', request.params.tagId).select()
+  .then((tags) => {
+    response.status(200).json(tags)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+})
+
+// app.get('/api/photos/feeling/:feelingId', (request, response) => {
+//   database('photos').where('feelingId', request.params.feelingId).select()
+//   .then((feelings) => {
+//     response.status(200).json(feelings)
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
+// })
 
 app.get('/api/feelings', (request, response) => {
   database('feelings').select()

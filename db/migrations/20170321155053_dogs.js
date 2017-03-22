@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary()
       table.string('dogName');
       table.string('pic');
+      table.string('tag');
       table.integer('tagId')
            .references('id')
            .inTable('tags');
@@ -23,9 +24,6 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('feelings', (table) => {
       table.increments('id').primary();
       table.string('feelingName');
-      table.integer('photoId')
-           .references('id')
-           .inTable('photos');
 
       table.timestamps();
     }),
