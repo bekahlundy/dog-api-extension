@@ -13,10 +13,18 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary()
       table.string('dogName');
       table.string('pic');
-      table.string('tag');
+
+      table.timestamps();
+    }),
+
+    knex.schema.createTable('photos_tags', (table) => {
+      table.increments('id').primary()
+      table.integer('photoId')
+           .references('id')
+           .inTable('photos')
       table.integer('tagId')
            .references('id')
-           .inTable('tags');
+           .inTable('tags')
 
       table.timestamps();
     }),
@@ -24,6 +32,9 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('feelings', (table) => {
       table.increments('id').primary();
       table.string('feelingName');
+      table.integer('photoId')
+           .references('id')
+           .inTable('photos');
 
       table.timestamps();
     }),
@@ -33,8 +44,9 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('feelings'),
+    knex.schema.dropTable('photos_tags'),
     knex.schema.dropTable('photos'),
+    knex.schema.dropTable('feelings'),
     knex.schema.dropTable('tags'),
   ])
 };

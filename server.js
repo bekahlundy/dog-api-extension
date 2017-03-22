@@ -42,25 +42,16 @@ app.get('/api/photos', (request, response) => {
           });
 })
 
-app.get('/api/photos/tag/:tagId', (request, response) => {
-  database('photos').where('tagId', request.params.tagId).select()
-  .then((tags) => {
-    response.status(200).json(tags)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-})
-
-// app.get('/api/photos/feeling/:feelingId', (request, response) => {
-//   database('photos').where('feelingId', request.params.feelingId).select()
-//   .then((feelings) => {
-//     response.status(200).json(feelings)
+// app.get('/api/photos/tag/:tagId', (request, response) => {
+//   database('photos').where('tagId', request.params.tagId).select()
+//   .then((tags) => {
+//     response.status(200).json(tags)
 //   })
 //   .catch((error) => {
 //     console.log(error)
 //   })
 // })
+
 
 app.get('/api/feelings', (request, response) => {
   database('feelings').select()
@@ -69,6 +60,16 @@ app.get('/api/feelings', (request, response) => {
           })
           .catch((error) => {
             console.error('somethings wrong with db (feelings)')
+          });
+})
+
+app.get('/api/photos_tags', (request, response) => {
+  database('photos_tags').select()
+          .then((photos_tags) => {
+            response.status(200).json(photos_tags);
+          })
+          .catch((error) => {
+            console.error('somethings wrong with db (photos_tags)')
           });
 })
 
