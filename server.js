@@ -22,6 +22,16 @@ app.get('/api/tags', (request, response) => {
           });
 })
 
+app.get('/api/tags/:tagId/photos', (request, response) => {
+  database('photos').where('tagId', request.params.tagId).select()
+  .then((tags) => {
+    response.status(200).json(tags)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+})
+
 app.get('/api/photos', (request, response) => {
   database('photos').select()
           .then((photos) => {
