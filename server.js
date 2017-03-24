@@ -19,7 +19,7 @@ app.get('/api/tags', (request, response) => {
           })
           .catch((error) => {
             console.error('somethings wrong with db (tags)')
-            console.error(error)
+            response.status(404).json(tags);
           });
 })
 
@@ -53,6 +53,7 @@ app.get('/api/photos', (request, response) => {
     })
     .catch((error) => {
       console.error('somethings wrong with db (photos)')
+      response.status(404).json(photos);
     });
   }
 })
@@ -65,6 +66,7 @@ app.get('/api/photos_tags', (request, response) => {
           })
           .catch((error) => {
             console.error('somethings wrong with db (photos_tags)')
+            response.status(404).json(photos_tags);
           });
 })
 
@@ -76,6 +78,7 @@ app.get('/api/feelings', (request, response) => {
           })
           .catch((error) => {
             console.error('somethings wrong with db (feelings)')
+            response.status(404).json(feelings);
           });
 })
 
@@ -87,6 +90,7 @@ app.get('/api/tags/:id', (request, response) => {
   })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(tags);
   })
 })
 
@@ -98,6 +102,7 @@ app.get('/api/photos/:id', (request, response) => {
   })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(photos);
   })
 })
 
@@ -109,6 +114,7 @@ app.get('/api/feelings/:photoId', (request, response) => {
   })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(feeling);
   })
 })
 
@@ -123,6 +129,7 @@ app.post('/api/tags', (request, response) => {
     })
     .catch((error) => {
       console.log(error)
+      response.status(404).json(tags);
     })
   })
 })
@@ -139,6 +146,7 @@ app.post('/api/photos', (request, response) => {
     })
     .catch((error) => {
       console.log(error)
+      response.status(404).json(photos);
     })
   })
 })
@@ -154,6 +162,7 @@ app.patch('/api/tags/:id', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(tags);
   })
 })
 
@@ -168,6 +177,7 @@ app.patch('/api/feelings/:photoId', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(feelings);
   })
 })
 
@@ -182,6 +192,7 @@ app.patch('/api/photos/:id', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(photos);
   })
 })
 
@@ -200,6 +211,7 @@ app.delete('/api/photos/:id', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(photos);
   })
 })
 
@@ -215,6 +227,7 @@ app.delete('/api/tags/:id', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(tags);
   })
 })
 
@@ -231,6 +244,7 @@ app.delete('/api/feelings/:photoId', (request, response) => {
     })
   .catch((error) => {
     console.log(error)
+    response.status(404).json(feelings);
   })
 })
 
