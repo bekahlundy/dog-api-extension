@@ -137,7 +137,7 @@ app.post('/api/tags', (request, response) => {
 
 // post photo to db
 app.post('/api/photos', (request, response) => {
-  const photo = { dogName: request.body.dogName, pic: request.body.pic }
+  const photo = { feelingName: request.body.feelingName, photoId: request.body.photoId }
   database('photos').insert(photo)
   .then(() => {
     database('photos').select()
@@ -147,6 +147,22 @@ app.post('/api/photos', (request, response) => {
     .catch((error) => {
       console.log(error)
       response.status(404).json(photos);
+    })
+  })
+})
+
+// post feeling to db
+app.post('/api/feelings', (request, response) => {
+  const feeling = { dogName: request.body.dogName, pic: request.body.pic }
+  database('feelings').insert(feeling)
+  .then(() => {
+    database('feelings').select()
+    .then((feelings) => {
+      response.status(200).json(feelings)
+    })
+    .catch((error) => {
+      console.log(error)
+      response.status(404).json(feelings);
     })
   })
 })
