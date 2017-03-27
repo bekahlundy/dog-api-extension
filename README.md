@@ -6,7 +6,7 @@ This  is a simple server-db template. The server is built on node-express, and c
 
 ### End Points
 
-you can check out the following endpoints on heroku
+you can check out the following endpoints on [heroku](https://pup-pals-db.herokuapp.com/api/photos)
 
 #### Get Requests
 
