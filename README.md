@@ -40,7 +40,7 @@ you can check out the following endpoints on heroku
 
 `GET`/api/feelings/:photoId
 
-* returns all photos associated with that feeling/photoId
+* returns the photo associated with that feeling by the photoId
 
 #### Post Requests
 
