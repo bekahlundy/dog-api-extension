@@ -1,10 +1,10 @@
-#Build your own Backend
+# Build your own Backend
 
-###Overview
+### Overview
 
 This  is a simple server-db template. The server is built on node-express, and connects to a postgres db via knex. Endpoints are tested using Mocha Chai. We have fours tables, one for photos, one for feelings, one for tags, and one for photos_tags. The idea is to implement this in a project for a chrome extension where every new tab you open, you get a dog greeting you.
 
-###End Points
+### End Points
 
 you can check out the following endpoints on heroku
 
@@ -56,7 +56,7 @@ you can check out the following endpoints on heroku
 
 * pass an object with a feeling name and a photoId in the body to insert a new feeling into the feeling table
 
-####Patch Requests
+#### Patch Requests
 
 `PATCH`/api/tags/:id
 
@@ -70,7 +70,7 @@ you can check out the following endpoints on heroku
 
 * this endpoint will allow you to update a photos dogName
 
-####Delete Requests
+#### Delete Requests
 
 `DELETE`/api/photos/:id
 
@@ -88,5 +88,5 @@ you can check out the following endpoints on heroku
 
 * deletes a photos tags combo in the photos_tags table by id
 
-###Tests
-![passing-tests-screenshot](http://imgur.com/a/aggAk)
+### Tests
+![passing-tests-screenshot](http://i.imgur.com/XHx87tx.png)
