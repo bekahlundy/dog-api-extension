@@ -121,50 +121,50 @@ app.get('/api/feelings/:photoId', (request, response) => {
 // post tags to db
 app.post('/api/tags', (request, response) => {
   const tag = { tagName: request.body.tagName, created_at: new Date }
-  database('tags').insert(tag)
-  .then(() => {
-    database('tags').select()
-    .then((tags) => {
-      response.status(200).json(tags)
+  if (request.body.tagName) {
+    database('tags').insert(tag)
+    .then(() => {
+      database('tags').select()
+      .then((tags) => {
+        response.status(200).json(tags)
+      })
     })
-    .catch((error) => {
-      console.log(error)
-      response.status(404).json(tags);
-    })
-  })
+    } else {
+      response.sendStatus(422)
+    }
 })
 
 
 // post photo to db
 app.post('/api/photos', (request, response) => {
-  const photo = { feelingName: request.body.feelingName, photoId: request.body.photoId }
-  database('photos').insert(photo)
-  .then(() => {
-    database('photos').select()
-    .then((photos) => {
-      response.status(200).json(photos)
+  const tag = { dogName: request.body.dogName, created_at: new Date }
+  if (request.body.dogName) {
+    database('photos').insert(tag)
+    .then(() => {
+      database('photos').select()
+      .then((photos) => {
+        response.status(200).json(photos)
+      })
     })
-    .catch((error) => {
-      console.log(error)
-      response.status(404).json(photos);
-    })
-  })
+    } else {
+      response.sendStatus(422)
+    }
 })
 
 // post feeling to db
 app.post('/api/feelings', (request, response) => {
-  const feeling = { dogName: request.body.dogName, pic: request.body.pic }
-  database('feelings').insert(feeling)
-  .then(() => {
-    database('feelings').select()
-    .then((feelings) => {
-      response.status(200).json(feelings)
+  const tag = { feelingName: request.body.feelingName, created_at: new Date }
+  if (request.body.feelingName) {
+    database('feelings').insert(tag)
+    .then(() => {
+      database('feelings').select()
+      .then((feelings) => {
+        response.status(200).json(feelings)
+      })
     })
-    .catch((error) => {
-      console.log(error)
-      response.status(404).json(feelings);
-    })
-  })
+    } else {
+      response.sendStatus(422)
+    }
 })
 
 // patch new tagName on /api/tags/:id
@@ -213,16 +213,13 @@ app.patch('/api/photos/:id', (request, response) => {
 })
 
 // delete idv photo group
-// only deletes other
 app.delete('/api/photos/:id', (request, response) => {
   const { id } = request.params
-    database('photos').where('id', id).select()
+    database('photos').where('id', id).select().del()
     .then((photos) => {
-      database('photos').where('id', id).select().del()
+      database('photos').select()
       .then((photos) => {
-        database('photos').where('id', id).then((photos) => {
           response.status(200).json(photos)
-        })
       })
     })
   .catch((error) => {
@@ -234,9 +231,9 @@ app.delete('/api/photos/:id', (request, response) => {
 // delete idv tag
 app.delete('/api/tags/:id', (request, response) => {
   const { id } = request.params
-    database('tags').where('id', id).select()
+    database('tags').where('id', id).select().del()
     .then((tags) => {
-      database('tags').where('id', id).select().del()
+      database('tags').select()
       .then((tags) => {
           response.status(200).json(tags)
       })
@@ -248,12 +245,11 @@ app.delete('/api/tags/:id', (request, response) => {
 })
 
 // delete idv feeling
-// only deletes seed
 app.delete('/api/feelings/:photoId', (request, response) => {
   const { photoId } = request.params
-    database('feelings').where('photoId', photoId).select()
+    database('feelings').where('photoId', photoId).select().del()
     .then((feelings) => {
-      database('feelings').where('photoId', photoId).select().del()
+      database('feelings').select()
       .then((feelings) => {
           response.status(200).json(feelings)
       })
@@ -261,6 +257,21 @@ app.delete('/api/feelings/:photoId', (request, response) => {
   .catch((error) => {
     console.log(error)
     response.status(404).json(feelings);
+  })
+})
+
+app.delete('/api/photos_tags/:id', (request, response) => {
+  const { id } = request.params
+    database('photos_tags').where('id', id).select().del()
+    .then((photos_tags) => {
+      database('photos_tags').select()
+      .then((photos_tags) => {
+          response.status(200).json(photos_tags)
+      })
+    })
+  .catch((error) => {
+    console.log(error)
+    response.status(404).json(photos_tags);
   })
 })
 
